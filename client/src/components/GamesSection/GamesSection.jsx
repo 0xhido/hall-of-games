@@ -13,7 +13,7 @@ export default class GamesSection extends Component {
 
     this.state = {
       filterText: '',
-      layout: 'row'
+      layout: 'row',
     };
   }
 
@@ -22,7 +22,7 @@ export default class GamesSection extends Component {
     const { filterText, layout } = this.state;
 
     const filteredGames = games.filter(game =>
-      game.name.toLowerCase().includes(filterText.toLowerCase())
+      game.name.toLowerCase().includes(filterText.toLowerCase()),
     );
 
     return (
@@ -43,7 +43,7 @@ export default class GamesSection extends Component {
                 this.setState(state =>
                   state.layout === 'row'
                     ? { layout: 'grid' }
-                    : { layout: 'row' }
+                    : { layout: 'row' },
                 )
               }
             />
@@ -63,5 +63,5 @@ export default class GamesSection extends Component {
 
 GamesSection.propTypes = {
   title: PropTypes.string,
-  games: PropTypes.array
+  games: PropTypes.array,
 };

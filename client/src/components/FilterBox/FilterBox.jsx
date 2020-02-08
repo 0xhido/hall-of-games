@@ -19,7 +19,7 @@ function FilterBox({ placeholder, handleChange }) {
 
 FilterBox.propTypes = {
   placeholder: PropTypes.string,
-  handleChange: PropTypes.func
+  handleChange: PropTypes.func,
 };
 
 export default FilterBox;

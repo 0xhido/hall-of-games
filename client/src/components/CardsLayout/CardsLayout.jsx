@@ -9,7 +9,7 @@ function CardsLayout({ children, layout }) {
 
 CardsLayout.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element),
-  layout: PropTypes.string
+  layout: PropTypes.string,
 };
 
 export default CardsLayout;
