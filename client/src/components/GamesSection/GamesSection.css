@@ -1,0 +1,36 @@
+.game__section {
+  margin: 1rem;
+}
+
+.game__section--top {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.game__section--title {
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+  text-align: left;
+}
+
+.game__section--actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.game__section--actions .icon__layout {
+  height: 20px;
+  width: 20px;
+  margin: auto 0;
+}
+
+.game__section--actions .icon__layout--row svg {
+  transition: fill 2.5s linear;
+  fill: #9b9b9b;
+}
+
+.game__section--actions .icon__layout--grid svg {
+  transition: fill 2.5s linear;
+  fill: #38ef7d;
+}

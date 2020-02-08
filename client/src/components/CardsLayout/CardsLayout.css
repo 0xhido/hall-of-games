@@ -1,0 +1,44 @@
+.cards__layout--row {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  text-align: left;
+  transition: all 0.5s linear;
+}
+
+.cards__layout--row::-webkit-scrollbar-track {
+  height: 3px;
+  background-color: #323232;
+}
+
+.cards__layout--row::-webkit-scrollbar {
+  height: 3px;
+  background-color: #38ef7d;
+}
+
+.cards__layout--row::-webkit-scrollbar-thumb {
+  height: 3px;
+  border-radius: 3px;
+  background-color: #38ef7d;
+}
+
+.cards__layout--row > * {
+  display: inline-block;
+  text-align: center;
+}
+
+.cards__layout--row > *:first-child {
+  margin-left: 0;
+}
+
+.cards__layout--row > *:last-child {
+  margin-right: 0;
+}
+
+.cards__layout--grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  /* width: 90%; */
+  justify-items: center;
+  grid-gap: 1rem;
+}
