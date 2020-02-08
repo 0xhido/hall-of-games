@@ -4,8 +4,10 @@
     "before",
     "except",
     "function",
+    "minmax",
     "paren",
     "parens",
+    "scrollbar",
     "space"
   ]
 }
