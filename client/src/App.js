@@ -13,7 +13,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://api.rawg.io/api/games?page=1&page_size=20')
+    fetch('https://api.rawg.io/api/games?page=1&page_size=10')
       .then(res => res.json())
       .then(data => this.setState({ games: data.results }));
   }
