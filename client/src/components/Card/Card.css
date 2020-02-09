@@ -13,14 +13,14 @@
   height: 150px;
 }
 
-.game__card--img > div {
+.game__card--img>div {
   height: 100%;
   background-position: 50%;
   background-size: cover;
   transition: 0.2s;
 }
 
-.game__card:hover .game__card--img > div {
+.game__card:hover .game__card--img>div {
   transform: scale(1.02);
 }
 
@@ -39,15 +39,18 @@
   font-size: 1rem;
 }
 
+.game__card--actions {
+  display: block;
+  height: 0;
+}
+
 @media all and (max-width: 600px) {
   .game__section--actions {
     margin: 10px 0;
   }
-
   .game__section--title h1 {
     font-size: 1.2rem;
   }
-
   .game__section--title p {
     font-size: 0.8rem;
   }
