@@ -42,3 +42,30 @@
   justify-items: center;
   grid-gap: 1rem;
 }
+
+@media all and (max-width: 600px) {
+  .game__card {
+    height: 170px;
+    width: 100px;
+  }
+
+  .game__card--img {
+    height: 100px;
+  }
+
+  .game__card--details {
+    padding: 10px;
+  }
+
+  .game__card--details h1 {
+    font-size: 10px;
+  }
+
+  .game__card--details p {
+    font-size: 10px;
+  }
+
+  .cards__layout--grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+}

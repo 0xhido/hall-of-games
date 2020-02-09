@@ -1,7 +1,7 @@
 .game__card {
   width: 200px;
   height: 250px;
-  margin: 0 1rem;
+  margin: 0 0.3rem;
   overflow: hidden;
   border-radius: 15px;
   background: #202020;
@@ -37,4 +37,18 @@
 .game__card--details p {
   margin: 0;
   font-size: 1rem;
+}
+
+@media all and (max-width: 600px) {
+  .game__section--actions {
+    margin: 10px 0;
+  }
+
+  .game__section--title h1 {
+    font-size: 1.2rem;
+  }
+
+  .game__section--title p {
+    font-size: 0.8rem;
+  }
 }
