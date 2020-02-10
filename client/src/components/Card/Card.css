@@ -2,9 +2,15 @@
   box-sizing: border-box;
 }
 
-.card__like {
-  width: 18px;
-  fill: white;
+.modal__concent {
+  z-index: 100;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .card__img {
@@ -21,7 +27,7 @@
 .card__info--hover {
   position: absolute;
   padding: 16px;
-  width: 100%;
+  z-index: 10;
   opacity: 0;
   top: 0;
 }
@@ -89,4 +95,9 @@
 
 .card:hover .card__info--hover {
   opacity: 1;
+}
+
+.card__action {
+  width: 18px;
+  fill: white;
 }

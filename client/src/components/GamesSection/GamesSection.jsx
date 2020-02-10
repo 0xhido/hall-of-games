@@ -18,7 +18,7 @@ export default class GamesSection extends Component {
   }
 
   render() {
-    const { title, games } = this.props;
+    const { title, games, onRemoveCard } = this.props;
     const { filterText, layout } = this.state;
 
     const filteredGames = games.filter(game =>
@@ -51,7 +51,11 @@ export default class GamesSection extends Component {
         </div>
         <div className="game__section--cards">
           {filteredGames.length ? (
-            <CardList cards={filteredGames} layout={layout} />
+            <CardList
+              cards={filteredGames}
+              layout={layout}
+              onRemoveCard={onRemoveCard}
+            />
           ) : (
             <p>No games found.</p>
           )}
