@@ -12,6 +12,7 @@ class App extends React.Component {
       onGoing: [],
       completed: [],
       favorites: [],
+      categories: ['onGoing', 'completed', 'favorites'],
     };
   }
 
@@ -36,29 +37,63 @@ class App extends React.Component {
     }));
   };
 
+  handleAddToCategory = (category, id) => {
+    const { games } = this.state;
+    const game = games.filter(g => g.id === id)[0];
+
+    // eslint-disable-next-line
+    const isExists = this.state[category].filter(game => game.id === id).length;
+    if (!isExists) {
+      this.setState(prevState => ({
+        [category]: [...prevState[category], game],
+      }));
+    }
+  };
+
   render() {
-    const { games, completed, favorites, onGoing } = this.state;
+    const { games, completed, favorites, onGoing, categories } = this.state;
+
     return (
       <div className="App">
         <GamesSection
+          title="My Games"
+          games={games}
+          category="games"
+          categories={categories}
+          onRemoveCard={id => this.handleRemoveCard('games', id)}
+          onAddToCategory={(category, id) =>
+            this.handleAddToCategory(category, id)
+          }
+        />
+        <GamesSection
           title="Currently Playing"
           games={onGoing}
+          category="onGoing"
+          categories={categories.filter(category => category !== 'onGoing')}
           onRemoveCard={id => this.handleRemoveCard('onGoing', id)}
+          onAddToCategory={(category, id) =>
+            this.handleAddToCategory(category, id)
+          }
         />
         <GamesSection
           title="Completed"
           games={completed}
+          category="completed"
+          categories={categories.filter(category => category !== 'completed')}
           onRemoveCard={id => this.handleRemoveCard('completed', id)}
+          onAddToCategory={(category, id) =>
+            this.handleAddToCategory(category, id)
+          }
         />
         <GamesSection
           title="Favorites"
           games={favorites}
+          category="favorites"
+          categories={categories.filter(category => category !== 'favorites')}
           onRemoveCard={id => this.handleRemoveCard('favorites', id)}
-        />
-        <GamesSection
-          title="My Games"
-          games={games}
-          onRemoveCard={id => this.handleRemoveCard('games', id)}
+          onAddToCategory={(category, id) =>
+            this.handleAddToCategory(category, id)
+          }
         />
       </div>
     );

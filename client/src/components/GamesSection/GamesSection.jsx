@@ -18,11 +18,20 @@ export default class GamesSection extends Component {
   }
 
   render() {
-    const { title, games, onRemoveCard } = this.props;
+    const {
+      title,
+      games,
+      category,
+      categories,
+      onRemoveCard,
+      onAddToCategory,
+    } = this.props;
     const { filterText, layout } = this.state;
 
     const filteredGames = games.filter(game =>
-      game.name.toLowerCase().includes(filterText.toLowerCase())
+      game.name
+        ? game.name.toLowerCase().includes(filterText.toLowerCase())
+        : true
     );
 
     return (
@@ -53,8 +62,11 @@ export default class GamesSection extends Component {
           {filteredGames.length ? (
             <CardList
               cards={filteredGames}
+              category={category}
+              categories={categories}
               layout={layout}
               onRemoveCard={onRemoveCard}
+              onAddToCategory={onAddToCategory}
             />
           ) : (
             <p>No games found.</p>
@@ -68,4 +80,8 @@ export default class GamesSection extends Component {
 GamesSection.propTypes = {
   title: PropTypes.string,
   games: PropTypes.array,
+  category: PropTypes.string,
+  categories: PropTypes.array,
+  onAddToCategory: PropTypes.func,
+  onRemoveCard: PropTypes.func,
 };

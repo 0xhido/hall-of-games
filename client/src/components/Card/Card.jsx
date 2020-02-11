@@ -2,20 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ReactSVG } from 'react-svg';
 
-import './Card.css';
+import CardModal from '../CardModal/CardModal';
 
-const Modal = ({ visible, onYesClicked, onNoClicked }) =>
-  visible ? (
-    <div className="modal__concent">
-      <span>Are you sure?</span>
-      <button type="button" onClick={onYesClicked}>
-        Yes
-      </button>
-      <button type="button" onClick={onNoClicked}>
-        No
-      </button>
-    </div>
-  ) : null;
+import './Card.css';
 
 class Card extends React.Component {
   constructor(props) {
@@ -28,31 +17,71 @@ class Card extends React.Component {
   }
 
   render() {
-    const { data, onDoneClicked, onRemoveCard } = this.props;
-    const { showModal } = this.state;
+    const { data, categories, onAddToCategory, onRemoveCard } = this.props;
+    const { showModal, showSubMenu } = this.state;
+    const categoryName = {
+      onGoing: 'Currently Playing',
+      completed: 'Completed',
+      favorites: 'Favorites',
+    };
+
+    const concentModal = (
+      <CardModal visible={showModal}>
+        <span>Are you sure?</span>
+        <button
+          type="button"
+          onClick={() => {
+            this.setState({ showModal: false });
+            return onRemoveCard(data.id);
+          }}
+        >
+          Yes
+        </button>
+        <button
+          type="button"
+          onClick={() => this.setState({ showModal: false })}
+        >
+          No
+        </button>
+      </CardModal>
+    );
+
+    const addToModal = (
+      <CardModal visible={showSubMenu}>
+        <span>Add to:</span>
+        {categories.map(category => (
+          <button
+            key={category}
+            type="button"
+            onClick={() => {
+              this.setState({ showSubMenu: false });
+              return onAddToCategory(category, data.id);
+            }}
+          >
+            {categoryName[category]}
+          </button>
+        ))}
+        <button
+          type="button"
+          onClick={() => this.setState({ showSubMenu: false })}
+        >
+          Back
+        </button>
+      </CardModal>
+    );
 
     return (
       <div
         className="card"
-        onMouseLeave={() => this.setState({ showModal: false })}
+        // onMouseLeave={() => this.setState({ showModal: false })} TODO delete?
       >
-        <Modal
-          visible={showModal}
-          onYesClicked={() => {
-            this.setState({ showModal: false });
-            return onRemoveCard(data.id);
-          }}
-          onNoClicked={() => this.setState({ showModal: false })}
-        />
+        {concentModal}
+        {addToModal}
         <div className="card__info--hover">
-          {/* <ReactSVG
+          <ReactSVG
             className="card__action card__action--add"
             src={`${process.env.PUBLIC_URL}/add.svg`}
-          /> */}
-          <ReactSVG
-            className="card__action card__action--done"
-            src={`${process.env.PUBLIC_URL}/done.svg`}
-            onClick={() => this.setState({ showModal: true })}
+            onClick={() => this.setState({ showSubMenu: true })}
           />
           <ReactSVG
             className="card__action card__action--remove"
@@ -64,6 +93,8 @@ class Card extends React.Component {
           className="card__img"
           style={{ backgroundImage: `url(${data.image})` }}
         />
+
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a href="#" className="card__link">
           <div
             className="card__img--hover"
@@ -81,8 +112,9 @@ class Card extends React.Component {
 
 Card.propTypes = {
   data: PropTypes.object,
-  onDoneClicked: PropTypes.func,
+  categories: PropTypes.array,
   onRemoveCard: PropTypes.func,
+  onAddToCategory: PropTypes.func,
 };
 
 export default Card;

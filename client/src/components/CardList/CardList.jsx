@@ -6,11 +6,24 @@ import CardsLayout from '../CardsLayout/CardsLayout';
 
 import './CardList.css';
 
-function CardList({ cards, layout, onRemoveCard }) {
+function CardList({
+  cards,
+  layout,
+  category,
+  categories,
+  onRemoveCard,
+  onAddToCategory,
+}) {
   return (
     <CardsLayout layout={layout}>
       {cards.map(card => (
-        <Card key={card.id} data={card} onRemoveCard={onRemoveCard} />
+        <Card
+          key={`${category}-${card.id}`}
+          data={card}
+          categories={categories}
+          onRemoveCard={onRemoveCard}
+          onAddToCategory={onAddToCategory}
+        />
       ))}
     </CardsLayout>
   );
@@ -19,6 +32,10 @@ function CardList({ cards, layout, onRemoveCard }) {
 CardList.propTypes = {
   cards: PropTypes.array,
   layout: PropTypes.string,
+  category: PropTypes.string,
+  categories: PropTypes.array,
+  onRemoveCard: PropTypes.func,
+  onAddToCategory: PropTypes.func,
 };
 
 export default CardList;
