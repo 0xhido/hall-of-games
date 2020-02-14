@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './CardModal.css';
 
 function CardModal({ visible, children }) {
-  return visible ? <div className="modal">{children}</div> : null;
+  return visible ? <div className="card__modal">{children}</div> : null;
 }
 
 CardModal.propTypes = {
