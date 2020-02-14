@@ -14,6 +14,8 @@ function CardList({
   onRemoveCard,
   onAddToCategory,
 }) {
+  console.log('cards', cards);
+
   return (
     <CardsLayout layout={layout}>
       {cards.map(card => (

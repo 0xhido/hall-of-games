@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.margin__top {
+  display: block;
+  margin-top: 6rem;
+}
+
 .inner {
   max-width: 90%;
   margin: 2rem auto;

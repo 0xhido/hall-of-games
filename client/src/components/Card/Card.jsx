@@ -20,6 +20,7 @@ class Card extends React.Component {
     const { data, categories, onAddToCategory, onRemoveCard } = this.props;
     const { showModal, showSubMenu } = this.state;
     const categoryName = {
+      games: 'My Games',
       onGoing: 'Currently Playing',
       completed: 'Completed',
       favorites: 'Favorites',
@@ -55,10 +56,13 @@ class Card extends React.Component {
             type="button"
             onClick={() => {
               this.setState({ showSubMenu: false });
-              return onAddToCategory(category, data.id);
+              return onAddToCategory(category, data);
             }}
           >
-            {categoryName[category]}
+            {
+              // eslint-disable-next-line
+              categoryName[category]
+            }
           </button>
         ))}
         <button
@@ -78,16 +82,20 @@ class Card extends React.Component {
         {concentModal}
         {addToModal}
         <div className="card__info--hover">
-          <ReactSVG
-            className="card__action card__action--add"
-            src={`${process.env.PUBLIC_URL}/add.svg`}
-            onClick={() => this.setState({ showSubMenu: true })}
-          />
-          <ReactSVG
-            className="card__action card__action--remove"
-            src={`${process.env.PUBLIC_URL}/remove.svg`}
-            onClick={() => this.setState({ showModal: true })}
-          />
+          {onAddToCategory ? (
+            <ReactSVG
+              className="card__action card__action--add"
+              src={`${process.env.PUBLIC_URL}/add.svg`}
+              onClick={() => this.setState({ showSubMenu: true })}
+            />
+          ) : null}
+          {onRemoveCard ? (
+            <ReactSVG
+              className="card__action card__action--remove"
+              src={`${process.env.PUBLIC_URL}/remove.svg`}
+              onClick={() => this.setState({ showModal: true })}
+            />
+          ) : null}
         </div>
         <div
           className="card__img"

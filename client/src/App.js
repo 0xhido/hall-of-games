@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './App.css';
+import SearchBar from './components/SearchBar/SearchBar';
 import GamesSection from './components/GamesSection/GamesSection';
 
 class App extends React.Component {
@@ -12,7 +13,7 @@ class App extends React.Component {
       onGoing: [],
       completed: [],
       favorites: [],
-      categories: ['onGoing', 'completed', 'favorites'],
+      categories: ['games', 'onGoing', 'completed', 'favorites'],
     };
   }
 
@@ -37,15 +38,12 @@ class App extends React.Component {
     }));
   };
 
-  handleAddToCategory = (category, id) => {
-    const { games } = this.state;
-    const game = games.filter(g => g.id === id)[0];
-
+  handleAddToCategory = (category, game) => {
     // eslint-disable-next-line
-    const isExists = this.state[category].filter(game => game.id === id).length;
+    const isExists = this.state[category].filter(g => g.id === game.id).length;
     if (!isExists) {
       this.setState(prevState => ({
-        [category]: [...prevState[category], game],
+        [category]: [game].concat(prevState[category]),
       }));
     }
   };
@@ -55,6 +53,17 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <SearchBar
+          placeholder="search a game"
+          maxResults={10}
+          category="search"
+          categories={categories}
+          onRemoveCard={null}
+          onAddToCategory={(category, card) =>
+            this.handleAddToCategory(category, card)
+          }
+        />
+        <div className="margin__top" />
         <GamesSection
           title="My Games"
           games={games}
